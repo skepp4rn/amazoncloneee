@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import { ProductContext } from '../contexts/ProductContext';
 
 function Basket() {
-  const { state } = useContext(ProductContext);
+  const { state, dispatch } = useContext(ProductContext);
   const { basket } = state;
+
+  const handleRemove = (id) => {
+    dispatch({ type: 'REMOVE_FROM_BASKET', id: id });
+  };
 
   return (
     <div>
@@ -25,6 +29,7 @@ function Basket() {
                   <p key={i}>⭐</p>
                 ))}
             </div>
+            <button onClick={() => handleRemove(item.id)}>Remove from basket</button>
           </div>
         </div>
       ))}
